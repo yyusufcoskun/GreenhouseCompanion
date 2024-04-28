@@ -24,14 +24,13 @@ fun TextSurface(data:String){
     Card(
         modifier = Modifier
             .padding(15.dp)
-            .size(width=105.dp, height =350.dp),
+            .size(width=90.dp, height =350.dp),
         border = BorderStroke(2.dp, Color.White),
         shape = RoundedCornerShape(20.dp),
         // contentAlignment = Alignment.Center,
         elevation = CardDefaults.cardElevation(
             defaultElevation = 25.dp
         )
-        // elevation = ElevationOverlayProvider(40.dp)
     ){
         Text("Hello $data", modifier = Modifier.padding(30.dp))
     }

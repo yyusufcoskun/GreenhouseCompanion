@@ -37,7 +37,7 @@ fun GreenhouseCompanionScreen(){
                 TextSurface(test2)
                 TextSurface(test3)
             }
-            Spacer(modifier = Modifier.size(90.dp))
+            Spacer(modifier = Modifier.size(30.dp))
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.Center
@@ -56,6 +56,7 @@ fun GreenhouseCompanionScreen(){
                     202f, 0.17f, 1f,
                     19f, 0.17f, 0.5f)
             }
+            Spacer(modifier = Modifier.size(60.dp))
         }
     }
 }
