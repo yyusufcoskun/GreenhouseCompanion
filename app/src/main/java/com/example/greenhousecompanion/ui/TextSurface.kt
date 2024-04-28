@@ -18,12 +18,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.google.android.material.elevation.ElevationOverlayProvider
 
+
 @Composable
 fun TextSurface(data:String){
     Card(
         modifier = Modifier
-            .padding(12.dp)
-            .size(width=70.dp, height =200.dp),
+            .padding(15.dp)
+            .size(width=105.dp, height =350.dp),
         border = BorderStroke(2.dp, Color.White),
         shape = RoundedCornerShape(20.dp),
         // contentAlignment = Alignment.Center,
@@ -32,6 +33,6 @@ fun TextSurface(data:String){
         )
         // elevation = ElevationOverlayProvider(40.dp)
     ){
-        Text("Hello $data", modifier = Modifier.padding(1.dp))
+        Text("Hello $data", modifier = Modifier.padding(30.dp))
     }
 }
