@@ -15,6 +15,7 @@ import com.example.greenhousecompanion.ui.MySwitch
 import com.example.greenhousecompanion.ui.TextSurface
 
 class MainActivity : ComponentActivity() {
+    private val BASE_URL = "http://192.168.1.116"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
