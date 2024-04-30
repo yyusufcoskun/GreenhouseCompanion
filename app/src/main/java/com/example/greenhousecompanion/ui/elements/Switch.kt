@@ -1,4 +1,4 @@
-package com.example.greenhousecompanion.ui
+package com.example.greenhousecompanion.ui.elements
 
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.foundation.Image

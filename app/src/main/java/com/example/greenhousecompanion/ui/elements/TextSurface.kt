@@ -1,4 +1,4 @@
-package com.example.greenhousecompanion.ui
+package com.example.greenhousecompanion.ui.elements
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.fillMaxWidth

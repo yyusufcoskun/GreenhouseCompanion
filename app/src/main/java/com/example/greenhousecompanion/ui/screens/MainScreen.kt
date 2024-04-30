@@ -1,4 +1,4 @@
-package com.example.greenhousecompanion.screens
+package com.example.greenhousecompanion.ui.screens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -14,9 +14,8 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.example.greenhousecompanion.R
-import com.example.greenhousecompanion.ui.MyButton
-import com.example.greenhousecompanion.ui.MySwitch
-import com.example.greenhousecompanion.ui.TextSurface
+import com.example.greenhousecompanion.ui.elements.MySwitch
+import com.example.greenhousecompanion.ui.elements.TextSurface
 
 @Composable
 fun GreenhouseCompanionScreen(){

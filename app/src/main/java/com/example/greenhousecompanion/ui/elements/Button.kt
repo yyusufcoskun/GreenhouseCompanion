@@ -1,4 +1,4 @@
-package com.example.greenhousecompanion.ui
+package com.example.greenhousecompanion.ui.elements
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
