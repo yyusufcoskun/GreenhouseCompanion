@@ -6,9 +6,9 @@ import retrofit2.Call
 import retrofit2.http.GET
 
 interface ApiInterface {
-    @GET("/temperature/")
+    @GET("/temperature")
     fun getTemperature(): Call<TemperatureData>
 
-    @GET("/humidity/")
+    @GET("/humidity")
     fun getHumidity(): Call<HumidityData>
 }
