@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import com.example.greenhousecompanion.api.model.HumidityData
+import com.example.greenhousecompanion.api.model.SoilMoistureData
 import com.example.greenhousecompanion.api.model.TemperatureData
 import com.example.greenhousecompanion.api.service.ApiInterface
 import com.example.greenhousecompanion.ui.screens.GreenhouseCompanionScreen
@@ -33,19 +35,46 @@ class MainActivity : ComponentActivity() {
             GreenhouseCompanionScreen()
         }
         temperatureDataFetcher()
+        humidityDataFetcher()
+        //soilMoistureDataFetcher()
     }
 
+
+    // ------------------ COROUTINES TIMERS FOR FETCHING DATA ON AN INTERVAL -----------------------------------------------------------
     //trying timer with coroutines
     private fun temperatureDataFetcher() {
         job = coroutineScope.launch {
             while (isActive) { // Loop until coroutine is active
                 loadTemperatureData() // Fetch data from server
+                delay(5000) // Delay for 5 seconds -- make 60
+            }
+        }
+    }
+
+    private fun humidityDataFetcher() {
+        job = coroutineScope.launch {
+            while (isActive) {
+                loadHumidityData()
+                delay(5000) // Delay for 5 seconds -- make 60
+            }
+        }
+    }
+
+    private fun soilMoistureDataFetcher() {
+        job = coroutineScope.launch {
+            while (isActive) {
+                loadSoilMoistureData()
                 delay(5000) // Delay for 5 seconds
             }
         }
     }
+
+
+    // ------------------ LOAD DATA FUNCTIONS -------------------------------------------------------------------------------------------
+
+    // ------------------ LOAD TEMPERATURE DATA -------------------------------------------------
     private fun loadTemperatureData() { // acaba hepsini tek fonksiyonda toplayabilir miyim?
-        val gson = GsonBuilder().setLenient().create() // JSON bozuk geliyormuş şimdilik böyle lenient olarak koydum
+        val gson = GsonBuilder().setLenient().create() // JSON bozuk geliyormuş şimdilik böyle lenient olarak koydum -- değiştirilebilir
         val retrofit = Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create(gson)) //burada da gson üstünden kurdu üç satır üstteki
@@ -71,6 +100,69 @@ class MainActivity : ComponentActivity() {
             }
 
         }) // parantez buraya geliyor
+    }
+
+
+    // ------------------ LOAD HUMIDITY DATA -------------------------------------------------
+
+    private fun loadHumidityData() {
+        val gson = GsonBuilder().setLenient().create()
+        val retrofit = Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create(gson))
+            .build()
+
+        val service = retrofit.create(ApiInterface::class.java)
+        val call = service.getHumidity()
+
+        call.enqueue(object: Callback<HumidityData> {
+            override fun onResponse(
+                call: Call<HumidityData>,
+                response: Response<HumidityData>
+            ) {
+                if (response.isSuccessful){
+                    response.body()?.let {
+                        println(response.body())
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<HumidityData>, t: Throwable) {
+                t.printStackTrace()
+            }
+
+        })
+    }
+
+    // ------------------ LOAD SOIL MOISTURE DATA -------------------------------------------------
+
+    private fun loadSoilMoistureData() {
+        val gson = GsonBuilder().setLenient().create()
+        val retrofit = Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create(gson))
+            .build()
+
+        val service = retrofit.create(ApiInterface::class.java)
+        val call = service.getSoilMoisture()
+
+        call.enqueue(object: Callback<SoilMoistureData> {
+            override fun onResponse(
+                call: Call<SoilMoistureData>,
+                response: Response<SoilMoistureData>
+            ) {
+                if (response.isSuccessful){
+                    response.body()?.let {
+                        println(response.body())
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<SoilMoistureData>, t: Throwable) {
+                t.printStackTrace()
+            }
+
+        })
     }
 }
 
