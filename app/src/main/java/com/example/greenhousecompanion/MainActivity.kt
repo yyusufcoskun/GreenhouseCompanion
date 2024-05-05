@@ -4,6 +4,9 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import com.example.greenhousecompanion.api.model.HumidityData
 import com.example.greenhousecompanion.api.model.SoilMoistureData
 import com.example.greenhousecompanion.api.model.TemperatureData
@@ -26,13 +29,20 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 
 class MainActivity : ComponentActivity() {
-    private val BASE_URL = "http://192.168.1.112"
+    private val BASE_URL = "http://192.168.1.113"
     private lateinit var job: Job // Coroutine job - trial
     private val coroutineScope = CoroutineScope(Dispatchers.IO) // trial code
+
+    private var temperature by mutableStateOf("")
+    private var humidity by mutableStateOf("")
+    private var soilMoisture by mutableStateOf("")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            GreenhouseCompanionScreen()
+            GreenhouseCompanionScreen(
+                temperature = temperature,
+                humidity = humidity
+            )
         }
         temperatureDataFetcher()
         humidityDataFetcher()
@@ -91,6 +101,8 @@ class MainActivity : ComponentActivity() {
                     if (response.isSuccessful){
                         response.body()?.let { // .let = eğer null değilse bunu çalıştır
                                 println(response.body())
+                                val temperatureValue = it.temperature
+                                temperature = temperatureValue.toString()
                         }
                     }
             }
@@ -123,6 +135,8 @@ class MainActivity : ComponentActivity() {
                 if (response.isSuccessful){
                     response.body()?.let {
                         println(response.body())
+                        val humidityValue = it.humidity
+                        humidity = humidityValue.toString()
                     }
                 }
             }
@@ -154,6 +168,8 @@ class MainActivity : ComponentActivity() {
                 if (response.isSuccessful){
                     response.body()?.let {
                         println(response.body())
+                        val soilMoistureValue = it.soilMoisture
+                        soilMoisture = soilMoistureValue.toString()
                     }
                 }
             }

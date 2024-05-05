@@ -9,18 +9,21 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.Typography
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.google.android.material.elevation.ElevationOverlayProvider
 
 
 @Composable
-fun TextSurface(data:String){
+fun TextSurface(dataType: String, data:String){
     Card(
         modifier = Modifier
             .padding(15.dp)
@@ -32,6 +35,9 @@ fun TextSurface(data:String){
             defaultElevation = 25.dp
         )
     ){
-        Text("Hello $data", modifier = Modifier.padding(30.dp))
+        Text(text = "$dataType $data",
+            modifier = Modifier.padding(30.dp),
+            style = MaterialTheme.typography.titleMedium,
+            textAlign = TextAlign.Center )
     }
 }

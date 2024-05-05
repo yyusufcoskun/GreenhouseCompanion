@@ -7,8 +7,8 @@
 #define DHTTYPE DHT11   // DHT 11
 #define LIGHT_SENSOR_PIN A0
 
-const char* ssid = "CS99KN"; // don't forget to change these when you make a hotspot
-const char* password = "A0c3K1c2";
+const char* ssid = ""; // don't forget to change these when you make a hotspot
+const char* password = "";
 
 // Creates web server instanc
 ESP8266WebServer server(80);
