@@ -29,7 +29,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 
 class MainActivity : ComponentActivity() {
-    private val BASE_URL = "http://192.168.1.113"
+    private val BASE_URL = "http://192.168.1.106"
     private lateinit var job: Job // Coroutine job - trial
     private val coroutineScope = CoroutineScope(Dispatchers.IO) // trial code
 
@@ -44,28 +44,20 @@ class MainActivity : ComponentActivity() {
                 humidity = humidity
             )
         }
-        temperatureDataFetcher()
-        humidityDataFetcher()
+        temperatureAndHumidityDataFetcher()
         //soilMoistureDataFetcher()
     }
 
 
     // ------------------ COROUTINES TIMERS FOR FETCHING DATA ON AN INTERVAL -----------------------------------------------------------
     //trying timer with coroutines
-    private fun temperatureDataFetcher() {
+
+    private fun temperatureAndHumidityDataFetcher() {
         job = coroutineScope.launch {
             while (isActive) { // Loop until coroutine is active
                 loadTemperatureData() // Fetch data from server
-                delay(5000) // Delay for 5 seconds -- make 60
-            }
-        }
-    }
-
-    private fun humidityDataFetcher() {
-        job = coroutineScope.launch {
-            while (isActive) {
                 loadHumidityData()
-                delay(5000) // Delay for 5 seconds -- make 60
+                delay(5000) // TODO Delay for 5 seconds -- make 60
             }
         }
     }
