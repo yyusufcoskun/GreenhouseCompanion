@@ -207,10 +207,10 @@ class MainActivity : ComponentActivity() {
                         soilMoisture = soilMoistureValue.toString()
 
                         if (soilMoistureValue > upperSoilMoistureThreshold) {
-                            sendNotification("Soil", "wet")
+                            sendNotification("Dirt", "wet")
                             println("Soil wet notification sent.")
                         } else if (soilMoistureValue < lowerSoilMoistureThreshold){
-                            sendNotification("Soil", "dry")
+                            sendNotification("Dirt", "dry")
                             println("Soil dry notification sent.")
                         }
 
