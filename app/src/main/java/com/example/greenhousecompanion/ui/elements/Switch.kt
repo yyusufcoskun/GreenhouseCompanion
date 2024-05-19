@@ -19,14 +19,22 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun MySwitch(icon: Painter, iconSize: Int,
              hueThumb: Float, saturationThumb: Float, lightnessThumb: Float,
-             hueTrack: Float, saturationTrack: Float, lightnessTrack: Float) {
+             hueTrack: Float, saturationTrack: Float, lightnessTrack: Float,
+             onPostRequestOn: () -> Unit, onPostRequestOff: () -> Unit) {
     var checked by remember { mutableStateOf(false) }
 
     Switch(
         checked = checked,
         onCheckedChange = {
             checked = it
-            println("Switch switched!")
+            if (checked) {
+                println("Switch ON.")
+                onPostRequestOn()
+            } else {
+                println("Switch OFF.")
+                onPostRequestOff()
+            }
+
         },
         modifier = Modifier
             .scale(2.5f)

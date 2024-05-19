@@ -63,7 +63,11 @@ class MainActivity : ComponentActivity() {
             GreenhouseCompanionScreen(
                 temperature = temperature,
                 humidity = humidity,
-                soilMoisture = soilMoisture
+                soilMoisture = soilMoisture,
+                onPumpOn = { turnPumpOn() },
+                onPumpOff = { turnPumpOff() },
+                onFanOn = { turnFanOn() },
+                onFanOff = { turnFanOff() }
             )
         }
 
@@ -241,64 +245,6 @@ class MainActivity : ComponentActivity() {
 
     // ------------------ CONTROL FUNCTIONS -------------------------------------------------------------------------------------------
 
-    // ------------------ CONTROL FAN -------------------------------------------------
-
-    private fun turnFanOn() {
-        val gson = GsonBuilder().setLenient().create()
-        val retrofit = Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create(gson))
-            .build()
-
-        val service = retrofit.create(ApiInterface::class.java)
-        val call = service.turnFanOn()
-
-        call.enqueue(object: Callback<Void> {
-            override fun onResponse(
-                call: Call<Void>,
-                response: Response<Void>
-            ) {
-                if (response.isSuccessful){
-                    println("Fan turned on")
-                }
-            }
-
-            override fun onFailure(call: Call<Void>, t: Throwable) {
-                t.printStackTrace()
-            }
-
-        })
-    }
-
-
-    private fun turnFanOff() {
-        val gson = GsonBuilder().setLenient().create()
-        val retrofit = Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create(gson))
-            .build()
-
-        val service = retrofit.create(ApiInterface::class.java)
-        val call = service.turnFanOff()
-
-        call.enqueue(object: Callback<Void> {
-            override fun onResponse(
-                call: Call<Void>,
-                response: Response<Void>
-            ) {
-                if (response.isSuccessful){
-                    println("Fan turned off")
-                }
-            }
-
-            override fun onFailure(call: Call<Void>, t: Throwable) {
-                t.printStackTrace()
-            }
-
-        })
-    }
-
-
     // ------------------ CONTROL PUMP -------------------------------------------------
 
     private fun turnPumpOn() {
@@ -355,6 +301,62 @@ class MainActivity : ComponentActivity() {
         })
     }
 
+    // ------------------ CONTROL FAN -------------------------------------------------
+
+    private fun turnFanOn() {
+        val gson = GsonBuilder().setLenient().create()
+        val retrofit = Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create(gson))
+            .build()
+
+        val service = retrofit.create(ApiInterface::class.java)
+        val call = service.turnFanOn()
+
+        call.enqueue(object: Callback<Void> {
+            override fun onResponse(
+                call: Call<Void>,
+                response: Response<Void>
+            ) {
+                if (response.isSuccessful){
+                    println("Fan turned on")
+                }
+            }
+
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+                t.printStackTrace()
+            }
+
+        })
+    }
+
+
+    private fun turnFanOff() {
+        val gson = GsonBuilder().setLenient().create()
+        val retrofit = Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create(gson))
+            .build()
+
+        val service = retrofit.create(ApiInterface::class.java)
+        val call = service.turnFanOff()
+
+        call.enqueue(object: Callback<Void> {
+            override fun onResponse(
+                call: Call<Void>,
+                response: Response<Void>
+            ) {
+                if (response.isSuccessful){
+                    println("Fan turned off")
+                }
+            }
+
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+                t.printStackTrace()
+            }
+
+        })
+    }
 
     // ------------------ NOTIFICATION FUNCTIONS -----------------------------------------------------------------------------------
     private fun sendNotification(dataType: String, valueType: String){ // dataType = Temperature, Humidity... valueType = High/Low

@@ -18,15 +18,17 @@ interface ApiInterface {
     @GET("/soil")
     fun getSoilMoisture(): Call<SoilMoistureData>
 
+    @POST("/pumpOn")
+    fun turnPumpOn(): Call<Void>
+
+    @POST("/pumpOff")
+    fun turnPumpOff(): Call<Void>
+
     @POST("/fanOn")
     fun turnFanOn(): Call<Void>
 
     @POST("/fanOff")
     fun turnFanOff(): Call<Void>
 
-    @POST("/pumpOn")
-    fun turnPumpOn(): Call<Void>
 
-    @POST("/pumpOff")
-    fun turnPumpOff(): Call<Void>
 }

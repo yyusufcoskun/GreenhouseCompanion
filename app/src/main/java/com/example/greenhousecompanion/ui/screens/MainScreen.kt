@@ -18,7 +18,9 @@ import com.example.greenhousecompanion.ui.elements.MySwitch
 import com.example.greenhousecompanion.ui.elements.TextSurface
 
 @Composable
-fun GreenhouseCompanionScreen(temperature: String, humidity: String, soilMoisture: String){
+fun GreenhouseCompanionScreen(temperature: String, humidity: String, soilMoisture: String,
+                              onPumpOn: () -> Unit, onPumpOff: () -> Unit,
+                              onFanOn: () -> Unit, onFanOff: () -> Unit){
     MaterialTheme{
         Column(
             modifier = Modifier.fillMaxSize(),
@@ -54,7 +56,8 @@ fun GreenhouseCompanionScreen(temperature: String, humidity: String, soilMoistur
                 val waterDropIcon: Painter = painterResource(id = R.drawable.waterdrop2) // without file extension name
                 MySwitch(waterDropIcon, 18,
                     168f, 0.7f, 1f,
-                    168f, 0.5f, 0.5f)
+                    168f, 0.5f, 0.5f,
+                    onPumpOn, onPumpOff)
             }
             Row(
                 verticalAlignment = Alignment.CenterVertically,
@@ -63,7 +66,8 @@ fun GreenhouseCompanionScreen(temperature: String, humidity: String, soilMoistur
                 val fanIcon: Painter = painterResource(id = R.drawable.fan) // without file extension name
                 MySwitch(fanIcon, 15,
                     202f, 0.17f, 1f,
-                    19f, 0.17f, 0.5f)
+                    19f, 0.17f, 0.5f,
+                    onFanOn, onFanOff)
             }
             Spacer(modifier = Modifier.size(60.dp))
         }
