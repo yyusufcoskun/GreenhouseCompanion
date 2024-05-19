@@ -24,9 +24,9 @@ interface ApiInterface {
     @POST("/fanOff")
     fun turnFanOff(): Call<Void>
 
-    @POST("/waterOn")
+    @POST("/pumpOn")
     fun turnPumpOn(): Call<Void>
 
-    @POST("/waterOff")
+    @POST("/pumpOff")
     fun turnPumpOff(): Call<Void>
 }

@@ -52,9 +52,8 @@ class MainActivity : ComponentActivity() {
     private val lowerTemperatureThreshold = 20.0
     private val upperHumidityThreshold = 65.0
     private val lowerHumidityThreshold = 40.0
-    private val upperSoilMoistureThreshold = 50.0
+    private val upperSoilMoistureThreshold = 50.0 //TODO change threshold
     private val lowerSoilMoistureThreshold = 25.0
-    //TODO add soil moisture sensor as well
 
 
     private val CHANNEL_ID = "channelID"
@@ -64,14 +63,14 @@ class MainActivity : ComponentActivity() {
             GreenhouseCompanionScreen(
                 temperature = temperature,
                 humidity = humidity,
-                soilMoisture = soilMoisture//TODO add soil moisture too, also as a parameter in MainScreen.kt
+                soilMoisture = soilMoisture
             )
         }
 
         createNotificationChannel()
 
         temperatureAndHumidityDataFetcher()
-        soilMoistureDataFetcher() //TODO IMPORTANT!!!!!!!!!!!!!!!! uncomment this
+        soilMoistureDataFetcher()
     }
 
     // ------------------ COROUTINES TIMERS FOR FETCHING DATA ON AN INTERVAL -----------------------------------------------------------
@@ -99,6 +98,20 @@ class MainActivity : ComponentActivity() {
 
 
     // ------------------ LOAD DATA FUNCTIONS -------------------------------------------------------------------------------------------
+    /*private fun createApiService(): ApiInterface { //TODO try this refactoring
+        val gson = GsonBuilder().setLenient().create()
+        val retrofit = Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create(gson))
+            .build()
+
+        return retrofit.create(ApiInterface::class.java)
+    }
+
+    private val apiService: ApiInterface by lazy {
+        createApiService()
+    }*/
+
 
     // ------------------ LOAD TEMPERATURE DATA -------------------------------------------------
     private fun loadTemperatureData() { // TODO refactor these functions
@@ -225,6 +238,123 @@ class MainActivity : ComponentActivity() {
 
         })
     }
+
+    // ------------------ CONTROL FUNCTIONS -------------------------------------------------------------------------------------------
+
+    // ------------------ CONTROL FAN -------------------------------------------------
+
+    private fun turnFanOn() {
+        val gson = GsonBuilder().setLenient().create()
+        val retrofit = Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create(gson))
+            .build()
+
+        val service = retrofit.create(ApiInterface::class.java)
+        val call = service.turnFanOn()
+
+        call.enqueue(object: Callback<Void> {
+            override fun onResponse(
+                call: Call<Void>,
+                response: Response<Void>
+            ) {
+                if (response.isSuccessful){
+                    println("Fan turned on")
+                }
+            }
+
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+                t.printStackTrace()
+            }
+
+        })
+    }
+
+
+    private fun turnFanOff() {
+        val gson = GsonBuilder().setLenient().create()
+        val retrofit = Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create(gson))
+            .build()
+
+        val service = retrofit.create(ApiInterface::class.java)
+        val call = service.turnFanOff()
+
+        call.enqueue(object: Callback<Void> {
+            override fun onResponse(
+                call: Call<Void>,
+                response: Response<Void>
+            ) {
+                if (response.isSuccessful){
+                    println("Fan turned off")
+                }
+            }
+
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+                t.printStackTrace()
+            }
+
+        })
+    }
+
+
+    // ------------------ CONTROL PUMP -------------------------------------------------
+
+    private fun turnPumpOn() {
+        val gson = GsonBuilder().setLenient().create()
+        val retrofit = Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create(gson))
+            .build()
+
+        val service = retrofit.create(ApiInterface::class.java)
+        val call = service.turnPumpOn()
+
+        call.enqueue(object: Callback<Void> {
+            override fun onResponse(
+                call: Call<Void>,
+                response: Response<Void>
+            ) {
+                if (response.isSuccessful){
+                    println("Pump turned on")
+                }
+            }
+
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+                t.printStackTrace()
+            }
+
+        })
+    }
+
+    private fun turnPumpOff() {
+        val gson = GsonBuilder().setLenient().create()
+        val retrofit = Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create(gson))
+            .build()
+
+        val service = retrofit.create(ApiInterface::class.java)
+        val call = service.turnPumpOff()
+
+        call.enqueue(object: Callback<Void> {
+            override fun onResponse(
+                call: Call<Void>,
+                response: Response<Void>
+            ) {
+                if (response.isSuccessful){
+                    println("Pump turned off")
+                }
+            }
+
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+                t.printStackTrace()
+            }
+
+        })
+    }
+
 
     // ------------------ NOTIFICATION FUNCTIONS -----------------------------------------------------------------------------------
     private fun sendNotification(dataType: String, valueType: String){ // dataType = Temperature, Humidity... valueType = High/Low

@@ -18,7 +18,7 @@ import com.example.greenhousecompanion.ui.elements.MySwitch
 import com.example.greenhousecompanion.ui.elements.TextSurface
 
 @Composable
-fun GreenhouseCompanionScreen(temperature: String, humidity: String, soilMoisture: String){ //TODO add parameter
+fun GreenhouseCompanionScreen(temperature: String, humidity: String, soilMoisture: String){
     MaterialTheme{
         Column(
             modifier = Modifier.fillMaxSize(),
