@@ -15,15 +15,18 @@ interface ApiInterface {
     @GET("/humidity")
     fun getHumidity(): Call<HumidityData>
 
-    @GET("/light")
-    fun getLightIntensity(): Call<LightIntensityData>
-
     @GET("/soil")
     fun getSoilMoisture(): Call<SoilMoistureData>
 
-    //@POST("/pump")
-    //fun postWaterPump(): implement post here
+    @POST("/fanOn")
+    fun turnFanOn(): Call<Void>
 
-    //@POST("/fan")
-    //fun postFan(): implement post here
+    @POST("/fanOff")
+    fun turnFanOff(): Call<Void>
+
+    @POST("/waterOn")
+    fun turnPumpOn(): Call<Void>
+
+    @POST("/waterOff")
+    fun turnPumpOff(): Call<Void>
 }

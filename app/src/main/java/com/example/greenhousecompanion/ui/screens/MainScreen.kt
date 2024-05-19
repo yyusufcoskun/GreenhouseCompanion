@@ -18,7 +18,7 @@ import com.example.greenhousecompanion.ui.elements.MySwitch
 import com.example.greenhousecompanion.ui.elements.TextSurface
 
 @Composable
-fun GreenhouseCompanionScreen(temperature: String, humidity: String/*, soilMoisture: String*/){ //TODO add parameter
+fun GreenhouseCompanionScreen(temperature: String, humidity: String, soilMoisture: String){ //TODO add parameter
     MaterialTheme{
         Column(
             modifier = Modifier.fillMaxSize(),
@@ -31,12 +31,22 @@ fun GreenhouseCompanionScreen(temperature: String, humidity: String/*, soilMoist
             ){
                 val tempType = "Temperature: "
                 val humType = "Humidity: "
-                val soilType = "Soil Moisture: "
-                TextSurface(tempType, temperature)
-                TextSurface(humType, humidity)
-                TextSurface(soilType, "sp" /*soilMoisture*/) //TODO add as parameter
+                TextSurface(tempType, temperature, 175, 250)
+                TextSurface(humType, humidity, 175, 250)
             }
+
+            //Spacer(modifier = Modifier.size(30.dp))
+
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Center
+            ){
+                val soilType = "Soil Moisture: "
+                TextSurface(soilType, soilMoisture, 380, 90)
+            }
+
             Spacer(modifier = Modifier.size(30.dp))
+
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.Center

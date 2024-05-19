@@ -63,14 +63,15 @@ class MainActivity : ComponentActivity() {
         setContent {
             GreenhouseCompanionScreen(
                 temperature = temperature,
-                humidity = humidity //TODO add soil moisture too, also as a parameter in MainScreen.kt
+                humidity = humidity,
+                soilMoisture = soilMoisture//TODO add soil moisture too, also as a parameter in MainScreen.kt
             )
         }
 
         createNotificationChannel()
 
         temperatureAndHumidityDataFetcher()
-        //soilMoistureDataFetcher() //TODO IMPORANT!!!!!!!!!!!!!!!! uncomment this
+        soilMoistureDataFetcher() //TODO IMPORTANT!!!!!!!!!!!!!!!! uncomment this
     }
 
     // ------------------ COROUTINES TIMERS FOR FETCHING DATA ON AN INTERVAL -----------------------------------------------------------
@@ -207,10 +208,10 @@ class MainActivity : ComponentActivity() {
                         soilMoisture = soilMoistureValue.toString()
 
                         if (soilMoistureValue > upperSoilMoistureThreshold) {
-                            sendNotification("Soil", "wet")
+                            sendNotification("Dirt", "wet")
                             println("Soil wet notification sent.")
                         } else if (soilMoistureValue < lowerSoilMoistureThreshold){
-                            sendNotification("Soil", "dry")
+                            sendNotification("Dirt", "dry")
                             println("Soil dry notification sent.")
                         }
 

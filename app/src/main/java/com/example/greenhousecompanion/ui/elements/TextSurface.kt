@@ -17,17 +17,21 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.LineHeightStyle
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import com.google.android.material.elevation.ElevationOverlayProvider
 
 
 @Composable
-fun TextSurface(dataType: String, data:String){
+fun TextSurface(dataType: String, data:String, width: Int, height: Int){
     Card(
         modifier = Modifier
             .padding(15.dp)
-            .size(width=90.dp, height =350.dp),
+            .size(width = width.dp, height = height.dp),
         border = BorderStroke(2.dp, Color.White),
         shape = RoundedCornerShape(20.dp),
         // contentAlignment = Alignment.Center,
@@ -38,6 +42,7 @@ fun TextSurface(dataType: String, data:String){
         Text(text = "$dataType $data",
             modifier = Modifier.padding(30.dp),
             style = MaterialTheme.typography.titleMedium,
-            textAlign = TextAlign.Center )
+            fontWeight = FontWeight.Bold,
+            textAlign = TextAlign.Center)
     }
 }
