@@ -15,7 +15,7 @@ interface ApiInterface {
     @GET("/humidity")
     fun getHumidity(): Call<HumidityData>
 
-    @GET("/soil")
+    @GET("/moisture")
     fun getSoilMoisture(): Call<SoilMoistureData>
 
     @POST("/waterOn")

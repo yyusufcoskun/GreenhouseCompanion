@@ -31,10 +31,10 @@ fun GreenhouseCompanionScreen(temperature: String, humidity: String, soilMoistur
                 verticalAlignment = Alignment.CenterVertically, // Row yüksekliğinin ortasına getiriyor
                 horizontalArrangement = Arrangement.Center
             ){
-                val tempType = "Temperature: "
-                val humType = "Humidity: "
-                TextSurface(tempType, temperature, 175, 250)
-                TextSurface(humType, humidity, 175, 250)
+                val tempType = "Temperature:  °C"
+                val humType = "Humidity: %"
+                TextSurface(tempType, temperature, 150, 250)
+                TextSurface(humType, humidity, 150, 250)
             }
 
             //Spacer(modifier = Modifier.size(30.dp))
@@ -43,8 +43,8 @@ fun GreenhouseCompanionScreen(temperature: String, humidity: String, soilMoistur
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.Center
             ){
-                val soilType = "Soil Moisture: "
-                TextSurface(soilType, soilMoisture, 380, 90)
+                val soilType = "Soil Moisture: %"
+                TextSurface(soilType, soilMoisture, 330, 90)
             }
 
             Spacer(modifier = Modifier.size(30.dp))

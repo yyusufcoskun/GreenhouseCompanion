@@ -48,12 +48,12 @@ class MainActivity : ComponentActivity() {
     private var humidityNotificationId: Int = 0
     private var soilMoistureNotificationId: Int = 0
 
-    private val upperTemperatureThreshold = 23.0 //TODO Change these parameters
+    private val upperTemperatureThreshold = 23.0
     private val lowerTemperatureThreshold = 20.0
-    private val upperHumidityThreshold = 65.0
-    private val lowerHumidityThreshold = 40.0
-    private val upperSoilMoistureThreshold = 50.0 //TODO change threshold
-    private val lowerSoilMoistureThreshold = 25.0
+    private val upperHumidityThreshold = 90.0 // TODO change these thresholds based on the plant you're going to use
+    private val lowerHumidityThreshold = 80.0
+    private val upperSoilMoistureThreshold = 80.0
+    private val lowerSoilMoistureThreshold = 40.0
 
 
     private val CHANNEL_ID = "channelID"
@@ -102,20 +102,6 @@ class MainActivity : ComponentActivity() {
 
 
     // ------------------ LOAD DATA FUNCTIONS -------------------------------------------------------------------------------------------
-    /*private fun createApiService(): ApiInterface { //TODO try this refactoring
-        val gson = GsonBuilder().setLenient().create()
-        val retrofit = Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create(gson))
-            .build()
-
-        return retrofit.create(ApiInterface::class.java)
-    }
-
-    private val apiService: ApiInterface by lazy {
-        createApiService()
-    }*/
-
 
     // ------------------ LOAD TEMPERATURE DATA -------------------------------------------------
     private fun loadTemperatureData() { // TODO refactor these functions
