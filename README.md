@@ -1,6 +1,14 @@
 # Greenhouse Companion
 Greenhouse Companion is an Android application written in Kotlin that allows users to monitor and control environmental conditions in their greenhouse. The app connects to an ESP8266 equipped with sensors for temperature, humidity, and soil moisture, as well as a water pump and a fan. The app provides a simple, user-friendly interface to view sensor data and control the actuators remotely.
 
+## Technologies Used
+- Kotlin
+- Jetpack Compose
+- Retrofit (HTTP)
+- Arduino Framework
+- ESP8266 Async Web Server
+- Electronics
+
 ## Features
 - **Real-time Monitoring:** View live temperature, humidity, and soil moisture levels from your greenhouse.
 - **Remote Control:** Control fan and water pump directly from the app.
