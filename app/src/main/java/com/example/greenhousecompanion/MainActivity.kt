@@ -37,7 +37,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 
 class MainActivity : ComponentActivity() {
-    private val BASE_URL = "http://192.168.1.105"
+    private val BASE_URL = "http://192.168.1.109"
     private lateinit var job: Job // Coroutine job - trial
     private val coroutineScope = CoroutineScope(Dispatchers.IO) // trial code
 
