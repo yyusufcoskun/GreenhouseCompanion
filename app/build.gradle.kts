@@ -55,6 +55,7 @@ dependencies {
     val composeBom = platform("androidx.compose:compose-bom:2024.04.01")
     implementation(composeBom)
     androidTestImplementation(composeBom)
+    implementation ("com.google.accompanist:accompanist-systemuicontroller:0.30.1")
 
    // Material Design 3
     implementation("androidx.compose.material3:material3")
@@ -88,6 +89,8 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
 //    implementation("androidx.core:core-ktx:2.2.0")
+
+    implementation("androidx.compose.ui:ui-text-google-fonts:1.6.7")
 
 
 }
