@@ -3,20 +3,32 @@
 #include <DHT.h>
 #include <ArduinoJson.h>
 
-#define DHT_PIN 5 // D1 - Digital pin connected to the DHT sensor, used GPIO number not pin number
+#define DHT_PIN 5 // D1 - Digital pin connected to the DHT sensor, use GPIO number not pin number
 #define DHTTYPE DHT11 // DHT 11
 #define SOIL_SENSOR_PIN A0
 #define WATER_PUMP_PIN 13 // D7
-#define FAN_PIN 12 //D6 
+#define FAN_PIN 4 //D2 
 
-const char* ssid = "";
+const char* ssid = ""; // don't forget to change these when you make a hotspot
 const char* password = "";
 
-DHT dht(DHT_PIN, DHTTYPE); // Humidity - Temp sensor
+//const char* ssid = "airbenders4"; 
+//const char* password = "airpass123";
+
+DHT dht(DHT_PIN, DHTTYPE); // humidity - temp sensor
 
 float temperature = 0;
 float humidity = 0;
 int soilMoisture = 0;
+
+//IPAddress local_IP(192, 168, 154, 109); // Set the static IP address
+IPAddress local_IP(192, 168, 1, 109);
+//IPAddress gateway(192, 168, 154, 189);    // Set the gateway
+IPAddress gateway(192, 168, 1, 1);    
+IPAddress subnet(255, 255, 255, 0); 
+
+
+
 
 AsyncWebServer server(80);
 
@@ -29,12 +41,20 @@ void setup() {
   digitalWrite(FAN_PIN, LOW); 
   digitalWrite(WATER_PUMP_PIN, LOW); 
   
+  if (!WiFi.config(local_IP, gateway, subnet)) {
+    Serial.println("STA Failed to configure");
+  } else {
+    Serial.println("STA Configured successfully");
+  }
+
+  
   // Connect to wifi
   WiFi.begin(ssid, password);
   while (WiFi.status() != WL_CONNECTED) {
     delay(1000);
     Serial.println("Connecting to WiFi...");
   }
+  
   Serial.print("Connected to WiFi, the IP address is: ");
   Serial.println(WiFi.localIP());
 
@@ -98,13 +118,13 @@ void setup() {
   });
 
   server.on("/waterOn", HTTP_ANY, [](AsyncWebServerRequest *request){
-    digitalWrite(WATER_PUMP_PIN, LOW);
+    digitalWrite(WATER_PUMP_PIN, HIGH);
     request->send(200, "text/plain", "Pump status: ON");
     Serial.println("Pump status: ON");
   });
 
   server.on("/waterOff", HTTP_ANY, [](AsyncWebServerRequest *request){
-    digitalWrite(WATER_PUMP_PIN, HIGH);
+    digitalWrite(WATER_PUMP_PIN, LOW);
     request->send(200, "text/plain", "Pump status: OFF");
     Serial.println("Pump status: OFF");
   });
